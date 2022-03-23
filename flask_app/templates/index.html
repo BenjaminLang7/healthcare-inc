@@ -7,7 +7,73 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-    
-</body>
+
+    <body>
+        <div class="container">
+            <h1 class="text-center">Login and Registration</h1>
+            <hr>
+            <div class="container">
+                <h2 class="text-center">Register</h2>
+                <form action="/register_user" method="POST">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="error">{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <div class="form-group">
+                        <label for="register_first_name">First Name</label>
+                        <input class="form-control" type="text" name="first_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="register_last_name">Last Name</label>
+                        <input class="form-control" type="text" name="last_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="register_email">Email</label>
+                        <input class="form-control" type="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="register_insurance">Insurance</label>
+                        <select name="insurance" id="insurance">
+                            <option value="aetna">Aetna</option>
+                            <option value="bluecross">Blue Cross Blue Shield</option>
+                            <option value="cigna">Cigna</option>
+                            <option value="united">United Healthcare</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="register_password">Password</label>
+                        <input class="form-control" type="password" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input class="form-control" type="password" name="confirm_password">
+                    </div>
+                    <div class="form-group">
+                        <label for="complete_registration"></label>
+                        <input class="button" type="submit" value="Register" name="register_account">
+                    </div>
+                </form>
+            </div>
+            <div class="container">
+                <h2 class="text-center">Login</h2>
+                <form action="/login_user" method="POST">
+                    <div class="form-group">
+                        <label for="login_email">Email</label>
+                        <input class="form-control" type="text" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login_password">Password</label>
+                        <input class="form-control" type="password" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="log_on"></label>
+                        <input class="button" type="submit" name="sign_in" value="Sign In">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
 </html>
