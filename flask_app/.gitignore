@@ -7,6 +7,7 @@ config/
 __init__.py
 Pipfile
 Pipfile.lock
+static/img/
 
 
 
