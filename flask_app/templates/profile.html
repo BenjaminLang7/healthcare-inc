@@ -4,10 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>View Profile</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    
+    <div class = "header">
+        <h1>View Profile</h1>
+        <a href="/dashboard">Home</a>
+    </div>
+    <div class = "profile_info">
+        <p>{first_name}</p>
+        <p>{last_name}</p>
+        <p>{email_address}</p>
+        <p>{insurance_providers.insurance_name}</p>
+    </div>
+    <a href = "/editProfile">Edit</a>
 </body>
 </html>

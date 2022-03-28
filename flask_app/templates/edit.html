@@ -4,10 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Profile</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    
+    <div class = "header">
+        <h1>Edit Profile</h1>
+        <a href="/dashboard">Home</a>
+    </div>
+    <form action='/account_update', method='POST'>
+        <section>
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" value={{user.first_name}}>
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" value={{user.last_name}}>
+            <label for ="email">Email:</label>
+            <input type="text" name="email" value={{user.email}}>
+        </section>
+        <label for="register_insurance">Insurance</label>
+        <select name="insurance" id="insurance">
+            <option value="aetna">Aetna</option>
+            <option value="bluecross">Blue Cross Blue Shield</option>
+            <option value="cigna">Cigna</option>
+            <option value="united">United Healthcare</option>
+        </select>
+        <button>Update Profile</button>
+    </form>
 </body>
 </html>

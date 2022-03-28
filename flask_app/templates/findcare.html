@@ -4,10 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Find Care</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    
+    <div class = "header">
+        <h1>Find Care</h1>
+        <a href="/dashboard">Home</a>
+    </div>
+    <div class = "care_info">
+        <form action="/find_care" method="POST">
+
+            <label for="care_type">Providers:</label>
+            <select name="care_type" id="care_type">
+                <option value="{provider_cares.id}">{provider_cares.care_type}</option>"
+            </select>
+
+            <label for="care_date">Select Date for Appointment:</label>
+            <input type="date" id="care_date" name="care_date">
+
+            <button>Book Appointment</button>
+        </form>
+    </div>
 </body>
 </html>

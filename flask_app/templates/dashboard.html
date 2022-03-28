@@ -4,10 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    
+    <h1>Welcome {{user.first.name}} {{user.last.name}!}</h1>
+    <div class = "appointments">
+        <h2>Upcoming Appointments</h2>
+        <!--{% for x in x %}-->
+        <table>
+            <tr>
+                <td>{{x.care_type}}</td>
+                <td>{{x.care_date}}</td> 
+                <td><a href="/delete">Cancel</a></td>
+            </tr>
+        </table>
+        <!--{% endfor %}-->
+    </div>
+    <div class = "options">
+        <a href = "/sortbydate">Sort by Date</a>
+        <a href = "/sortbyprovidername">Sort by Provider Name</a>
+        <a href = "/profile">Veiw Profile</a>
+        <a href = "/newappointment">Find Care</a>
+        <a href = "/editProfile">Edit Profile</a>
+    </div>
 </body>
 </html>
