@@ -61,12 +61,34 @@ class User:
             result = cls(result[0])
         return result
 
+    @classmethod
+    def get_all(cls):
+        query = "SELECT * FROM users;"
+        results = connectToMySQL(cls.db_name).query_db(query)
+        print(results)
+        users = []
+        for user in results:
+            users.append(cls(user))
+        return users
+
 ## UPDATE ##
 # Add update methods here #
 
+    @classmethod
+    def update_one(cls, data):
+        query = "UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, email=%(email)s, password=%(password)s, WHERE id = %(id)s;"
+        results = connectToMySQL(cls.db).query_db(query, data)
+        print(results)
+        return results
+
 ## DELETE ##
 # Add delete methods here #
-
+    @classmethod
+    def destroy(cls, data):
+        query = "DELETE FROM users WHERE users.id=%(id)s;"
+        results = connectToMySQL(cls.db_name).query_db(query,data)
+        print(results)
+        return results
 
 ## VALIDATE ##
 # Below is what I did for validation logic on my project. We can change it up, delete it, or use any parts.
