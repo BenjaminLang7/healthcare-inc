@@ -17,10 +17,13 @@ def register():
         "first_name": request.form['first_name'],
         "last_name": request.form['last_name'],
         "email": request.form['email'],
-        "insurance": request.form['insurance'],
         "password": encrypted_pw,
+        "insurance_name": request.form['insurance'],
     }
-    User.register(data)
+    print("Check here!!!!!!!!!!!!!!!!!!")
+    print(data)
+    user_id = User.register(data)
+    session['user_id'] = user_id
     return redirect('/dashboard')
 
 
@@ -47,14 +50,9 @@ def dashboard():
         "id": session['user_id']
     }
     one_user = User.get_user_by_id(data)
-    user_list = User.get_all(data)
-    print(user_list)
-    return render_template('dashboard.html', current_user = one_user, all_users = user_list)
+    return render_template('dashboard.html', user = one_user)
 
-
-# if we create a logout button
-
-#@app.route('/logout')
-#def logout():
-    #session.clear()
-    #return redirect('/')
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')

@@ -6,7 +6,7 @@ import re
 bcrypt = Bcrypt(app)
 
 class User:
-#    db = 'insert db name here'
+    db = 'healthcare_inc'
 
     def __init__(self, data):
         self.id = data['id']
@@ -14,52 +14,46 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
+        self.insurance_name = data['insurance']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
 ## CREATE ##
     @classmethod
     def register(cls, data ):
-        if not cls.validate_account(data):
-            return False
-        else:
-            data = cls.prep_data(data)
         query = """
-        INSERT INTO users ( first_name, last_name, email, password, created_at, updated_at ) 
-        VALUES ( %(first_name)s , %(last_name)s , %(email)s , %(password)s, NOW() , NOW() )
+        INSERT INTO users ( first_name, last_name, email, password, insurance_providers_id, created_at, updated_at ) 
+        VALUES ( %(first_name)s , %(last_name)s , %(email)s, %(password)s, %(insurance_providers_id)s, NOW() , NOW() )
         ;"""
-        user_id = connectToMySQL(cls.db).query_db(query, data)
+        results = connectToMySQL(cls.db).query_db(query, data)
         flash("Account creation successful")
-        session['first_name'] = data['first_name']
-        session['user_id'] = user_id
-        return user_id
+        print(results)
+        return results
 
 ## READ ##
     @classmethod
-    def get_user_by_email(cls, email):
-        data = {'email' : email}
+    def get_user_by_email(cls, data):
         query = """
         SELECT *
         FROM users
         WHERE email = %(email)s
         ;"""
-        result = connectToMySQL(cls.db).query_db(query, data)
-        if result:
-            result = cls(result[0])
-        return result
+        results = connectToMySQL(cls.db).query_db(query, data)
+        if len(results) < 1:
+            return False
+        return cls(results[0])
 
     @classmethod
-    def get_user_by_id(cls, id):
-        data = {'id' : id}
+    def get_user_by_id(cls, data):
         query = """
         SELECT *
         FROM users
         WHERE id = %(id)s
         ;"""
-        result = connectToMySQL(cls.db).query_db(query, data)
-        if result:
-            result = cls(result[0])
-        return result
+        results = connectToMySQL(cls.db).query_db(query, data)
+        if len(results) < 1:
+            return False
+        return cls(results[0])
 
     @classmethod
     def get_all(cls):
