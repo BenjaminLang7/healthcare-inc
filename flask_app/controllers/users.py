@@ -18,7 +18,7 @@ def register():
         "last_name": request.form['last_name'],
         "email": request.form['email'],
         "password": encrypted_pw,
-        "insurance_name": request.form['insurance'],
+        "insurance_name": request.form['insurance_name'],
     }
     print("Check here!!!!!!!!!!!!!!!!!!")
     print(data)
@@ -42,6 +42,21 @@ def login():
     session['user_id'] = user_with_email.id
     return redirect('/dashboard')
 
+@app.route('/account_update', methods=["POST"])
+def updateaccount():
+    if not User.validate_edit(request.form):
+        return redirect('/editProfile')
+    data = {
+        "id": session['user_id'],
+        "first_name": request.form['first_name'],
+        "last_name": request.form['last_name'],
+        "email": request.form['email'],
+        "insurance_name": request.form['insurance_name'],
+    }
+    current_user = User.update_one(data)
+    print(current_user)
+    return redirect('/dashboard')
+
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' not in session:
@@ -49,8 +64,40 @@ def dashboard():
     data = {
         "id": session['user_id']
     }
+    print(data)
     one_user = User.get_user_by_id(data)
     return render_template('dashboard.html', user = one_user)
+
+@app.route('/profile')
+def profile():
+    if 'user_id' not in session:
+        return redirect('/')
+    data = {
+        "id": session['user_id']
+    }
+    one_user = User.get_user_by_id(data)
+    return render_template('profile.html', user = one_user)
+
+@app.route('/editProfile')
+def editprofile():
+    if 'user_id' not in session:
+        return redirect('/')
+    data = {
+        "id": session['user_id']
+    }
+    one_user = User.get_user_by_id(data)
+    return render_template('edit.html', user = one_user)
+    
+
+@app.route('/newappointment')
+def findcare():
+    if 'user_id' not in session:
+        return redirect('/')
+    data = {
+        "id": session['user_id']
+    }
+    one_user = User.get_user_by_id(data)
+    return render_template("findcare.html", user = one_user)
 
 @app.route('/logout')
 def logout():

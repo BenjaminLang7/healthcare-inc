@@ -6,7 +6,7 @@ import re
 bcrypt = Bcrypt(app)
 
 class User:
-    db = 'healthcare_inc'
+    db = 'healthcare_inc_2'
 
     def __init__(self, data):
         self.id = data['id']
@@ -14,7 +14,7 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
-        self.insurance_name = data['insurance']
+        self.insurance_name = data['insurance_name']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
@@ -22,13 +22,14 @@ class User:
     @classmethod
     def register(cls, data ):
         query = """
-        INSERT INTO users ( first_name, last_name, email, password, insurance_providers_id, created_at, updated_at ) 
-        VALUES ( %(first_name)s , %(last_name)s , %(email)s, %(password)s, %(insurance_providers_id)s, NOW() , NOW() )
+        INSERT INTO users ( first_name, last_name, email, password, insurance_name, created_at, updated_at ) 
+        VALUES ( %(first_name)s , %(last_name)s , %(email)s , %(password)s, %(insurance_name)s, NOW() , NOW() )
         ;"""
-        results = connectToMySQL(cls.db).query_db(query, data)
+        user_id = connectToMySQL(cls.db).query_db(query, data)
         flash("Account creation successful")
-        print(results)
-        return results
+        session['first_name'] = data['first_name']
+        session['user_id'] = user_id
+        return user_id
 
 ## READ ##
     @classmethod
@@ -38,10 +39,10 @@ class User:
         FROM users
         WHERE email = %(email)s
         ;"""
-        results = connectToMySQL(cls.db).query_db(query, data)
-        if len(results) < 1:
-            return False
-        return cls(results[0])
+        result = connectToMySQL(cls.db).query_db(query, data)
+        if result:
+            result = cls(result[0])
+        return result
 
     @classmethod
     def get_user_by_id(cls, data):
@@ -50,10 +51,10 @@ class User:
         FROM users
         WHERE id = %(id)s
         ;"""
-        results = connectToMySQL(cls.db).query_db(query, data)
-        if len(results) < 1:
-            return False
-        return cls(results[0])
+        result = connectToMySQL(cls.db).query_db(query, data)
+        if result:
+            result = cls(result[0])
+        return result
 
     @classmethod
     def get_all(cls):
@@ -70,7 +71,9 @@ class User:
 
     @classmethod
     def update_one(cls, data):
-        query = "UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, email=%(email)s, password=%(password)s, WHERE id = %(id)s;"
+        print("LOOK HERE!!!!!!!!")
+        print(data)
+        query = "UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, email=%(email)s, insurance_name=%(insurance_name)s WHERE id = %(id)s;"
         results = connectToMySQL(cls.db).query_db(query, data)
         print(results)
         return results
@@ -152,16 +155,50 @@ class User:
         print("Validation completed successfully, no errors found.")
         return is_valid
 
-
-## HASH ##
-# This is just for hashing/salting our user passwords before storing them in the DB. Can delete the below code if we wanna do it another way. 
-
-    @staticmethod
-    def prep_data(data):
-        parsed_data = {
-            'first_name' : data['first_name'],
-            'last_name' : data['last_name'],
-            'email' : data['email'],
-            'password' : bcrypt.generate_password_hash(data['password'])
-        }
-        return parsed_data
+    @classmethod
+    def validate_edit(cls, data):
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        is_valid = True
+        # Check to make sure everything is submitted
+        if not data['first_name']:
+            flash("First name field must be submitted.")
+            is_valid = False
+        if not data['last_name']:
+            flash("Last name field must be submitted.")
+            is_valid = False
+        if not data['email']:
+            flash("Email field must be submitted.")
+            is_valid = False
+        # Check names for proper length
+        if len(data['first_name']) < 2:
+            flash("First name must be at least 2 letters")
+            is_valid = False
+        if len(data['last_name']) < 2:
+            flash("Last name must be at least 2 letters")
+            is_valid = False
+        # Verify names are alphabetical only
+        for character in data['first_name']:
+            if character.isalpha():
+                continue
+            else:
+                flash("Names can only be alphabetical")
+                is_valid = False
+        for character in data['last_name']:
+            if character.isalpha():
+                continue
+            else:
+                flash("Names can only be alphabetical")
+                is_valid = False
+        # Validate email format
+        if not EMAIL_REGEX.match(data['email']):
+            flash("Email format is invalid")
+            is_valid = False
+        # Check if email is already present in database
+        query = """
+        SELECT email
+        FROM users
+        WHERE email = %(email)s
+        ;"""
+        result = connectToMySQL(cls.db).query_db( query, data )
+        print("Validation completed successfully, no errors found.")
+        return is_valid
