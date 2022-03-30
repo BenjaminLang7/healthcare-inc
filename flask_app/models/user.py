@@ -14,7 +14,7 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
-        self.insurance_name = data['insurance']
+        self.insurance_name = data['insurance_name']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
@@ -22,8 +22,8 @@ class User:
     @classmethod
     def register(cls, data ):
         query = """
-        INSERT INTO users ( first_name, last_name, email, password, insurance_providers_id, created_at, updated_at ) 
-        VALUES ( %(first_name)s , %(last_name)s , %(email)s, %(password)s, %(insurance_providers_id)s, NOW() , NOW() )
+        INSERT INTO users ( first_name, last_name, email, password, insurance_name, created_at, updated_at ) 
+        VALUES ( %(first_name)s , %(last_name)s , %(email)s, %(password)s, %(insurance_name)s, NOW() , NOW() )
         ;"""
         results = connectToMySQL(cls.db).query_db(query, data)
         flash("Account creation successful")
