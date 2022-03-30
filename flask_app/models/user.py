@@ -6,7 +6,7 @@ import re
 bcrypt = Bcrypt(app)
 
 class User:
-    db = 'healthcare_inc'
+    db = 'healthcare_inc_2'
 
     def __init__(self, data):
         self.id = data['id']
