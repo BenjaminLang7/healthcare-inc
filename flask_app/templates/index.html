@@ -9,10 +9,12 @@
 </head>
 
     <body>
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="healthcare inc logo">
-        <div class="container">
+        <div class="main-header">
+            <img class="logo" src="{{ url_for('static', filename='logo.png') }}" alt="healthcare inc logo">
             <h1 class="text-center">Login and Registration</h1>
-            <hr>
+        </div>
+        <hr>
+        <div class="main-login-container">
             <div class="container">
                 <h2 class="text-center">Register</h2>
                 <form action="/register_user" method="POST">
