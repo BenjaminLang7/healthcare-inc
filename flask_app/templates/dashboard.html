@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Welcome {{user.first.name}} {{user.last.name}!}</h1>
+    <h1>Welcome {{user.first_name}} {{user.last_name}}!</h1>
     <div class = "appointments">
         <h2>Upcoming Appointments</h2>
         <!--{% for x in x %}-->
@@ -24,7 +24,7 @@
     <div class = "options">
         <a href = "/sortbydate">Sort by Date</a>
         <a href = "/sortbyprovidername">Sort by Provider Name</a>
-        <a href = "/profile">Veiw Profile</a>
+        <a href = "/profile">View Profile</a>
         <a href = "/newappointment">Find Care</a>
         <a href = "/editProfile">Edit Profile</a>
     </div>
