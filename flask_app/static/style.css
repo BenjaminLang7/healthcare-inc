@@ -17,6 +17,9 @@ body {
 h1 {
     padding-left: 30px;
 }
+h2 {
+    text-align: center;
+}
 
 
 
@@ -40,4 +43,26 @@ h1 {
 
 .main-login-container {
     display: flex;
+}
+
+.appointments {
+    border-color: rgb(19, 33, 48);
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.options {
+    text-align: center;
+    margin: 0px 0px 40px 0px;
+}
+
+.option {
+    color: rgb(19, 33, 48);
+    padding: 0px 10px;
+}
+.option:hover {
+    background-color: rgb(19, 33, 48);
+    color: white;
 }

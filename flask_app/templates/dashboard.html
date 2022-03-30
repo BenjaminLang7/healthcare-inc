@@ -8,7 +8,10 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Welcome {{user.first_name}} {{user.last_name}}!</h1>
+    <div class="main-header">
+        <img class="logo" src="{{ url_for('static', filename='logo.png') }}" alt="healthcare inc logo">
+        <h1>Welcome {{user.first_name}} {{user.last_name}}!</h1>
+    </div>
     <div class = "appointments">
         <h2>Upcoming Appointments</h2>
         {% for x in all_users %}
@@ -16,18 +19,21 @@
             <tr>
                 <td>{{x.care_type}}</td>
                 <td>{{x.care_date}}</td> 
-                <td><a href="/delete">Cancel</a></td>
+                <td><a class="option" href="/delete">Cancel</a></td>
             </tr>
         </table>
         {% endfor %}
     </div>
     <div class = "options">
-        <a href = "/sortbydate">Sort by Date</a>
-        <a href = "/sortbyprovidername">Sort by Provider Name</a>
-        <a href = "/profile">View Profile</a>
-        <a href = "/newappointment">Find Care</a>
-        <a href = "/editProfile">Edit Profile</a>
+        <a class="option" href = "/sortbydate">Sort by Date</a>
+        <a class="option" href = "/sortbyprovidername">Sort by Provider Name</a>
     </div>
-    <a href="/logout">Log Out</a>
+    <div class = "options">
+        <a class="option" href = "/profile">View Profile</a>
+        <a class="option" href = "/newappointment">Find Care</a>
+        <a class="option" href = "/editProfile">Edit Profile</a>
+        <a class="option" href="/logout">Log Out</a>
+    </div>
+    
 </body>
 </html>
