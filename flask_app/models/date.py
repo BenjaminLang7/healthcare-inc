@@ -1,18 +1,20 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask import flash, session
 from flask_app import app
-from flask_bcrypt import Bcrypt
-import re
-bcrypt = Bcrypt(app)
+
+from flask_app.models import user
+
+from flask import flash
 
 class Date:
-    db = 'healthcare_inc'
+    db = 'healthcare_inc_2'
 
     def __init__(self, data):
         self.id = data['id']
         self.care_date = data['care_date']
+        self.provider_name = data['provider_name']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.creator = None
 
 ## CREATE ##
     @classmethod

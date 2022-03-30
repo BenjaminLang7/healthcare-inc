@@ -13,10 +13,21 @@
         <a href="/dashboard">Home</a>
     </div>
     <div class = "profile_info">
-        <p>{first_name}</p>
-        <p>{last_name}</p>
-        <p>{email_address}</p>
-        <p>{insurance_providers.insurance_name}</p>
+        <p>{{user.first_name}}</p>
+        <p>{{user.last_name}}</p>
+        <p>{{user.email}}</p>
+        {% if user.insurance_name == "aetna" %}
+            <p>Aetna</p>
+        {% endif %}
+        {% if user.insurance_name == "bluecross" %}
+            <p>Blue Cross Blue Shield</p>
+        {% endif %}
+        {% if user.insurance_name == "cigna" %}
+            <p>Cigna</p>
+        {% endif %}
+        {% if user.insurance_name == "united" %}
+            <p>United Healthcare</p>
+        {% endif %}
     </div>
     <a href = "/editProfile">Edit</a>
 </body>

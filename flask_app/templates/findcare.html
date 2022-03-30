@@ -15,9 +15,34 @@
     <div class = "care_info">
         <form action="/find_care" method="POST">
             <label for="care_type">Providers:</label>
-            <select name="care_type" id="care_type">
-                <option value="{provider_cares.id}">{provider_cares.care_type}</option>"
-            </select>
+            {% if user.insurance_name == "aetna" %}
+                <select name="care_type" id="care_type">
+                    <option value="Lakeview Family Medicine">Lakeview Family Medicine</option>"
+                    <option value="Midwest Medical Associates">Midwest Medical Associates</option>"
+                    <option value="Northwestern Medicine">Northwestern Medicine</option>"
+                </select>
+            {% endif %}
+            {% if user.insurance_name == "bluecross" %}
+                <select name="care_type" id="care_type">
+                    <option value="NorthShore Medical Group">NorthShore Medical Group</option>"
+                    <option value="Fayetteville Family Medical">Fayetteville Family Medical</option>"
+                    <option value="Highland Family Practice">Highland Family Practice</option>"
+                </select>
+            {% endif %}
+            {% if user.insurance_name == "cigna" %}
+                <select name="care_type" id="care_type">
+                    <option value="Health Pavilion North Family Care">Health Pavilion North Family Care</option>"
+                    <option value="Hope Mills Family Care">Hope Mills Family Care</option>"
+                    <option value="Stedman Medical Care">Stedman Medical Care</option>"
+                </select>
+            {% endif %}
+            {% if user.insurance_name == "united" %}
+                <select name="care_type" id="care_type">
+                    <option value="Westside Medical Care">Westside Medical Care</option>"
+                    <option value="Hoke Primary Care">Hoke Primary Care</option>"
+                    <option value="Three Rivers Medical Center">Three Rivers Medical Center</option>"
+                </select>
+            {% endif %}
 
             <label for="care_date">Select Date for Appointment:</label>
             <input type="date" id="care_date" name="care_date">
