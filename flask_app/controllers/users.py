@@ -1,6 +1,7 @@
 from flask import render_template, redirect, request, flash, session
 from flask_app import app
 from flask_app.models.user import User
+from flask_app.models.date import Date
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -64,9 +65,31 @@ def dashboard():
     data = {
         "id": session['user_id']
     }
-    print(data)
     one_user = User.get_user_by_id(data)
-    return render_template('dashboard.html', user = one_user)
+    dates_list = Date.get_all_with_creator()
+    return render_template('dashboard.html', user = one_user, all_dates = dates_list)
+
+@app.route('/dashboard/sort_by_date')
+def sort_date():
+    data = {
+        "id": session['user_id']
+    }
+    one_user = User.get_user_by_id(data)
+    sorted_list = Date.sort_by_date()
+    print("SORTED LIST HERE!!!!!!!")
+    print(sorted_list)
+    return render_template('dashboard.html', user = one_user, all_dates = sorted_list)
+
+@app.route('/dashboard/sort_by_provider_name')
+def sort_name():
+    data = {
+        "id": session['user_id']
+    }
+    one_user = User.get_user_by_id(data)
+    sorted_list = Date.sort_by_provider_name()
+    print("SORTED LIST HERE!!!!!!!")
+    print(sorted_list)
+    return render_template('dashboard.html', user = one_user, all_dates = sorted_list)
 
 @app.route('/profile')
 def profile():

@@ -14,19 +14,21 @@
     </div>
     <div class = "appointments">
         <h2>Upcoming Appointments</h2>
-        {% for x in all_users %}
+        {% for one_date in all_dates %}
         <table>
+            {% if one_date.creator.id == user.id %}
             <tr>
-                <td>{{x.care_type}}</td>
-                <td>{{x.care_date}}</td> 
-                <td><a class="option" href="/delete">Cancel</a></td>
+                <td>{{one_date.provider_name}}</td>
+                <td>{{one_date.care_date.strftime('%A, %B %e, %Y %I:%M %p')}}</td> 
+                <td><a class="option" href="/delete/{{one_date.id}}">Cancel</a></td>
             </tr>
+            {% endif %}
         </table>
         {% endfor %}
     </div>
     <div class = "options">
-        <a class="option" href = "/sortbydate">Sort by Date</a>
-        <a class="option" href = "/sortbyprovidername">Sort by Provider Name</a>
+        <a class="option" href = "/dashboard/sort_by_date">Sort by Date</a>
+        <a class="option" href = "/dashboard/sort_by_provider_name">Sort by Provider Name</a>
     </div>
     <div class = "options">
         <a class="option" href = "/profile">View Profile</a>
