@@ -24,7 +24,6 @@ class User:
         query = """
         INSERT INTO users ( first_name, last_name, email, password, insurance_name, created_at, updated_at ) 
         VALUES ( %(first_name)s , %(last_name)s , %(email)s , %(password)s, %(insurance_name)s, NOW() , NOW() )
-        ;"""
         user_id = connectToMySQL(cls.db).query_db(query, data)
         flash("Account creation successful")
         session['first_name'] = data['first_name']
