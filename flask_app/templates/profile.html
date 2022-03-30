@@ -8,27 +8,28 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class = "header">
-        <h1>View Profile</h1>
-        <a href="/dashboard">Home</a>
-    </div>
-    <div class = "profile_info">
-        <p>{{user.first_name}}</p>
-        <p>{{user.last_name}}</p>
-        <p>{{user.email}}</p>
+    <h1 class="flush">View Profile</h1>
+    <div class = "appointments">
+        <p>First Name: <strong>{{user.first_name}}</strong></p>
+        <p>Last Name: <strong>{{user.last_name}}</strong></p>
+        <p>Email: <strong>{{user.email}}</strong></p>
         {% if user.insurance_name == "aetna" %}
-            <p>Aetna</p>
+            <p>Insurance Provider: <strong>Aetna</strong></p>
         {% endif %}
         {% if user.insurance_name == "bluecross" %}
-            <p>Blue Cross Blue Shield</p>
+            <p>Insurance Provider: <strong>Blue Cross Blue Shield</strong></p>
         {% endif %}
         {% if user.insurance_name == "cigna" %}
-            <p>Cigna</p>
+            <p>Insurance Provider: <strong>Cigna</strong></p>
         {% endif %}
         {% if user.insurance_name == "united" %}
-            <p>United Healthcare</p>
+            <p>Insurance Provider: <strong>United Healthcare</strong></p>
         {% endif %}
     </div>
-    <a href = "/editProfile">Edit</a>
+    <div class = "header">
+        <a class="option" href = "/editProfile">Edit</a>
+        <a class="option" href="/dashboard">Home</a>
+    </div>
+    
 </body>
 </html>
