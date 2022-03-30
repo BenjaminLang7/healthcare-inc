@@ -11,7 +11,7 @@
     <h1>Welcome {{user.first_name}} {{user.last_name}}!</h1>
     <div class = "appointments">
         <h2>Upcoming Appointments</h2>
-        <!--{% for x in x %}-->
+        {% for x in all_users %}
         <table>
             <tr>
                 <td>{{x.care_type}}</td>
@@ -19,7 +19,7 @@
                 <td><a href="/delete">Cancel</a></td>
             </tr>
         </table>
-        <!--{% endfor %}-->
+        {% endfor %}
     </div>
     <div class = "options">
         <a href = "/sortbydate">Sort by Date</a>
