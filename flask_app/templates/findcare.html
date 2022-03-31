@@ -9,12 +9,11 @@
 </head>
 <body>
     <div class = "header">
-        <h1>Find Care</h1>
-        <a href="/dashboard">Home</a>
+        <h1 class="flush">Find Care</h1>
     </div>
-    <div class = "care_info">
-        <form action="/find_care" method="POST">
-            {% with messages = get_flashed_messages() %}
+    <div class = "appointments">
+        <form class="form" action="/find_care" method="POST">
+          {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
                         <p class="error">{{message}}</p>
@@ -50,10 +49,11 @@
                     <option value="Three Rivers Medical Center">Three Rivers Medical Center</option>"
                 </select>
             {% endif %}
-            <label for="care_date">Select Date for Appointment:</label>
+            <label for="care_date">Date of Appointment:</label>
             <input type="datetime-local" id="care_date" name="care_date">
-            <button>Book Appointment</button>
+            <button class="button">Book Appointment</button>
         </form>
     </div>
+    <a class="option" href="/dashboard">Home</a>
 </body>
 </html>

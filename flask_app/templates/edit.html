@@ -9,26 +9,38 @@
 </head>
 <body>
     <div class = "header">
-        <h1>Edit Profile</h1>
-        <a href="/dashboard">Home</a>
+        <h1 class="flush">Edit Profile</h1>
     </div>
-    <form action='/account_update', method='POST'>
-        <section>
-            <label for="first_name">First Name:</label>
-            <input type="text" name="first_name" value={{user.first_name}}>
-            <label for="last_name">Last Name:</label>
-            <input type="text" name="last_name" value={{user.last_name}}>
-            <label for ="email">Email:</label>
-            <input type="text" name="email" value={{user.email}}>
-        </section>
-        <label for="insurance_name">Insurance</label>
-        <select name="insurance_name" id="insurance_name">
-            <option value="aetna">Aetna</option>
-            <option value="bluecross">Blue Cross Blue Shield</option>
-            <option value="cigna">Cigna</option>
-            <option value="united">United Healthcare</option>
-        </select>
-        <button>Update Profile</button>
+    <form class="appointments" action='/account_update', method='POST'>
+        <div class="form">
+            <section>
+                <div class="form-element">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" name="first_name" value={{user.first_name}}>
+                </div>
+                <div class="form-element">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" name="last_name" value={{user.last_name}}>
+                </div>
+                <div class="form-element">
+                    <label for ="email">Email:</label>
+                    <input type="text" name="email" value={{user.email}}>
+                </div>
+            </section>
+            <div class="form-element">
+                <label for="insurance_name">Insurance</label>
+                <select name="insurance_name" id="insurance_name">
+                    <option value="aetna">Aetna</option>
+                    <option value="bluecross">Blue Cross Blue Shield</option>
+                    <option value="cigna">Cigna</option>
+                    <option value="united">United Healthcare</option>
+                </select>
+            </div>
+            <div>
+                <button class="button">Update Profile</button>
+            </div>
+        </div>
     </form>
+    <a class="option" href="/dashboard">Home</a>
 </body>
 </html>
