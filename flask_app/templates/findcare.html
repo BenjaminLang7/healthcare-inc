@@ -13,39 +13,44 @@
     </div>
     <div class = "appointments">
         <form class="form" action="/find_care" method="POST">
-            <label for="care_type">Providers:</label>
+          {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="error">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <label for="provider_name">Providers:</label>
             {% if user.insurance_name == "aetna" %}
-                <select name="care_type" id="care_type">
+                <select name="provider_name" id="provider_name">
                     <option value="Lakeview Family Medicine">Lakeview Family Medicine</option>"
                     <option value="Midwest Medical Associates">Midwest Medical Associates</option>"
                     <option value="Northwestern Medicine">Northwestern Medicine</option>"
                 </select>
             {% endif %}
             {% if user.insurance_name == "bluecross" %}
-                <select name="care_type" id="care_type">
+                <select name="provider_name" id="provider_name">
                     <option value="NorthShore Medical Group">NorthShore Medical Group</option>"
                     <option value="Fayetteville Family Medical">Fayetteville Family Medical</option>"
                     <option value="Highland Family Practice">Highland Family Practice</option>"
                 </select>
             {% endif %}
             {% if user.insurance_name == "cigna" %}
-                <select name="care_type" id="care_type">
+                <select name="provider_name" id="provider_name">
                     <option value="Health Pavilion North Family Care">Health Pavilion North Family Care</option>"
                     <option value="Hope Mills Family Care">Hope Mills Family Care</option>"
                     <option value="Stedman Medical Care">Stedman Medical Care</option>"
                 </select>
             {% endif %}
             {% if user.insurance_name == "united" %}
-                <select name="care_type" id="care_type">
+                <select name="provider_name" id="provider_name">
                     <option value="Westside Medical Care">Westside Medical Care</option>"
                     <option value="Hoke Primary Care">Hoke Primary Care</option>"
                     <option value="Three Rivers Medical Center">Three Rivers Medical Center</option>"
                 </select>
             {% endif %}
-
             <label for="care_date">Date of Appointment:</label>
             <input type="datetime-local" id="care_date" name="care_date">
-
             <button class="button">Book Appointment</button>
         </form>
     </div>

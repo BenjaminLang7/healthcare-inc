@@ -73,7 +73,10 @@ class User:
     def update_one(cls, data):
         print("LOOK HERE!!!!!!!!")
         print(data)
-        query = "UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, email=%(email)s, insurance_name=%(insurance_name)s WHERE id = %(id)s;"
+        query = """
+        UPDATE users 
+        SET first_name=%(first_name)s, last_name=%(last_name)s, email=%(email)s, insurance_name=%(insurance_name)s WHERE id = %(id)s
+        ;"""
         results = connectToMySQL(cls.db).query_db(query, data)
         print(results)
         return results
@@ -202,3 +205,5 @@ class User:
         result = connectToMySQL(cls.db).query_db( query, data )
         print("Validation completed successfully, no errors found.")
         return is_valid
+
+
