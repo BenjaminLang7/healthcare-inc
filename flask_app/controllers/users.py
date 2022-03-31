@@ -34,7 +34,7 @@ def login():
         "email": request.form['email']
     }
     user_with_email = User.get_user_by_email(data)
-    if user_with_email == False:
+    if not user_with_email:
         flash("Invalid Email/Password")
         return redirect('/')
     if not bcrypt.check_password_hash(user_with_email.password, request.form['password']):

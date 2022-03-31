@@ -18,7 +18,7 @@
         <table>
             {% if one_date.creator.id == user.id %}
             <tr>
-                <td>{{one_date.provider_name}}</td>
+                <td><strong>{{one_date.provider_name}}</strong></td>
                 <td>{{one_date.care_date.strftime('%A, %B %e, %Y %I:%M %p')}}</td> 
                 <td><a class="option" href="/delete/{{one_date.id}}">Cancel</a></td>
             </tr>

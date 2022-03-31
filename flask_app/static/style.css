@@ -21,6 +21,11 @@ h2 {
     text-align: center;
 }
 
+td {
+    width: 300px;
+    text-align: center;
+}
+
 .flush {
     padding-left: 0px;
 
